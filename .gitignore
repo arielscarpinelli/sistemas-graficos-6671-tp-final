@@ -1,3 +1,5 @@
+Thumbs.db
+
 # Object files
 *.o
 *.ko
@@ -21,7 +23,6 @@
 *.dylib
 
 # Executables
-*.exe
 *.out
 *.app
 *.i*86
