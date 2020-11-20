@@ -1,31 +1,37 @@
 /************************************************************
 *	APRON TUTORIAL PRESENTED BY MORROWLAND					*
 *************************************************************
-*	Author					: Ronny André Reierstad			*
+*	Author					: Ronny Andrï¿½ Reierstad			*
 *	Web Page				: www.morrowland.com			*
 *	E-Mail					: apron@morrowland.com			*
 ************************************************************/
 
-#include"3dsloader.h"
+#include "3dsLoader.h"
 
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //										 INIT 3DS
 /////////////////////////////////////////////////////////////////////////////////////////////////
-void C3dsLoader::Init_3ds(char* path, char* filename)
+bool C3dsLoader::Init_3ds(char* path, char* filename)
 {
-	mLoad3ds.Import3DS(&m3DModel, filename);						
+	if(!mLoad3ds.Import3DS(&m3DModel, filename)) {
+		printf("failed to load 3ds model %s\n", filename);
+		return false;
+	}
 	
 	for(int i = 0; i < m3DModel.numOfMaterials; i++)				
 	{
 		if(strlen(m3DModel.pMaterials[i].strFile) > 0)				
 		{
-			Texture_3ds(TextureArray3ds, path, m3DModel.pMaterials[i].strFile, i);			
+			if(!Texture_3ds(TextureArray3ds, path, m3DModel.pMaterials[i].strFile, i)) {
+				return false;
+			}
 		}
 		
-		m3DModel.pMaterials[i].texureId = i;						
+		m3DModel.pMaterials[i].texureId = i;	
 	}
+	return true;
 }
 
 
@@ -96,7 +102,7 @@ void C3dsLoader::Render_3ds()
 //										TEXTURE 3DS			jpeg or bmp
 /////////////////////////////////////////////////////////////////////////////////////////////////
 #include "../Model.h"
-void C3dsLoader::Texture_3ds(UINT textureArray[], LPSTR strPath, LPSTR strFileName, int ID)
+bool C3dsLoader::Texture_3ds(UINT textureArray[], LPSTR strPath, LPSTR strFileName, int ID)
 {
 	char path[255];
 	strcpy(path, strPath);
@@ -104,6 +110,7 @@ void C3dsLoader::Texture_3ds(UINT textureArray[], LPSTR strPath, LPSTR strFileNa
 	char * ext = strstr(path, ".") + 1;
 	strcpy(ext, "bmp");
 	textureArray[ID] = loadTexture(path);
+	return textureArray[ID];
 }
 
 

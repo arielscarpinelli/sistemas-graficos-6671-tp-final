@@ -1,5 +1,5 @@
 #include "Skybox.h"
-#include <GL/glut.h>
+#include "GL/glut.h"
 
 /// Tendria que incluir glext.h pero en vc 6.0 no esta!!!
 #define GL_CLAMP_TO_EDGE 0x812F

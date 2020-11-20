@@ -1,7 +1,7 @@
 #ifndef MODEL_H_
 #define MODEL_H_
 
-#include <GL/glut.h>
+#include  "GL/glut.h"
 
 #include "Polygon.h"
 #include "Culler.h"

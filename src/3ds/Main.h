@@ -2,13 +2,19 @@
 #define _MAIN_H
 
 
-#include <windows.h>
-#include <windowsx.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <gl\gl.h>
-#include <gl\glu.h>
+
+#ifndef __APPLE__
+	#include <GL/gl.h>
+	#include <GL/glu.h>
+#else
+	#define GL_SILENCE_DEPRECATION
+	#include <OpenGL/gl.h>
+	#include <OpenGL/glu.h>
+#endif	
+
 #include <fstream>
 #include <vector>									
 using namespace std;
@@ -16,6 +22,10 @@ using namespace std;
 
 #define MAXTEXTURE 100
 
+typedef unsigned char BYTE;
+typedef unsigned int UINT;
+typedef char CHAR;
+typedef CHAR *LPSTR;
 
 //////////////////////////////////////
 //The tVector3 Struct
@@ -46,19 +56,8 @@ struct tVector2
 };
 
 
-
-//////////////////////////////////////
-//The Global Variables
-//////////////////////////////////////
-extern	HDC			hDC;			// Device Context
-extern	HGLRC		hRC;			// Permanent Rendering Context
-extern	HWND		hWnd;			// Holds Our Window Handle
-extern	HINSTANCE	hInstance;		// Holds The Instance Of The Application
-
-
-
 #endif
 
-//Ronny André Reierstad
+//Ronny Andrï¿½ Reierstad
 //www.morrowland.com
 //apron@morrowland.com

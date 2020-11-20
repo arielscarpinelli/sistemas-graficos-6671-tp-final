@@ -1,6 +1,6 @@
 
 #include <vector>
-#include <GL/glut.h>
+#include "GL/glut.h"
 #include <math.h>
 #include <cstdlib>
 #include <ctime>
@@ -24,7 +24,7 @@ using namespace std;
 typedef vector< Model* > Models;
 Models models;
 
-// Tamaño de la ventana
+// Tamaï¿½o de la ventana
 GLfloat width;
 GLfloat height;
 
@@ -316,14 +316,14 @@ int main(int argc, char** argv)
    glutInit(&argc, argv);
    glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 
-   glutGameModeString( "800x600:32@60" );
-   glutEnterGameMode();
+//   glutGameModeString( "800x600:32@60" );
+//   glutEnterGameMode();
 
-/*   glutInitWindowSize (800, 600); 
+   glutInitWindowSize (800, 600); 
    glutInitWindowPosition (0, 0);
 	 
    glutCreateWindow (argv[0]);
-*/   
+
    init ();
    glutDisplayFunc(display); 
    glutReshapeFunc(onResize);
@@ -349,7 +349,10 @@ GLuint loadTexture( const char * filename)
 	
 	printf("Cargando textura: %s\n", filename);
     img = fopen( filename, "rb" );
-    if ( img == NULL ) return 0;
+    if ( img == NULL ) {
+		printf("falla\n");
+		return 0;
+	}
 
 	fseek(img,18,SEEK_SET);
 	fread(&width,4,1,img);

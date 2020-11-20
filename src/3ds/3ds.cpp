@@ -1,7 +1,7 @@
 
-#include "main.h"
+#include "Main.h"
 #include "3ds.h"
-#include "3dmath.h"
+#include "3DMath.h"
 
 
 //-------------------------------- CLOADS3DS ------------------------------------
@@ -20,14 +20,11 @@ CLoad3DS::CLoad3DS()
 
 bool CLoad3DS::Import3DS(t3DModel *pModel, char *strFileName)
 {
-	char strMessage[255] = {0};
-	
 	m_FilePointer = fopen(strFileName, "rb");
 	
 	if(!m_FilePointer) 
 	{
-		sprintf(strMessage, "Unable to find the file: %s!", strFileName);
-		MessageBox(NULL, strMessage, "Error", MB_OK);
+		printf("Unable to find the file: %s!\n", strFileName);
 		return false;
 	}
 	
@@ -35,8 +32,7 @@ bool CLoad3DS::Import3DS(t3DModel *pModel, char *strFileName)
 	
 	if (m_CurrentChunk->ID != PRIMARY)
 	{
-		sprintf(strMessage, "Unable to load PRIMARY chuck from file: %s!", strFileName);
-		MessageBox(NULL, strMessage, "Error", MB_OK);
+		printf("Unable to load PRIMARY chuck from file: %s!\n", strFileName);
 		return false;
 	}
 	
@@ -46,7 +42,7 @@ bool CLoad3DS::Import3DS(t3DModel *pModel, char *strFileName)
 	
 	CleanUp();
 	
-	return 0;
+	return true;
 }
 
 //---------------------------------- CLEAN UP ----------------------------------
@@ -69,7 +65,7 @@ void CLoad3DS::ProcessNextChunk(t3DModel *pModel, tChunk *pPreviousChunk)
 {
 	t3DObject newObject = {0};					 
 	tMaterialInfo newTexture = {0};				
-	unsigned short version = 0;					
+	unsigned long version = 0;					
 	int buffer[50000] = {0};					
 	
 	m_CurrentChunk = new tChunk;				
@@ -84,8 +80,9 @@ void CLoad3DS::ProcessNextChunk(t3DModel *pModel, tChunk *pPreviousChunk)
 			
 			m_CurrentChunk->bytesRead += fread(&version, 1, m_CurrentChunk->length - m_CurrentChunk->bytesRead, m_FilePointer);
 			
-			if (version > 0x03)
-				MessageBox(NULL, "This 3DS file is over version 3 so it may load incorrectly", "Warning", MB_OK);
+			if (version > 0x03) {
+				printf("This 3DS file is over version 3 so it may load incorrectly\n");
+			}
 			break;
 			
 		case OBJECTINFO:						

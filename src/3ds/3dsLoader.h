@@ -2,7 +2,7 @@
 #ifndef _3DSLOADER_H
 #define _3DSLOADER_H
 
-#include "main.h"
+#include "Main.h"
 #include "3ds.h"
 
 
@@ -16,15 +16,15 @@ class C3dsLoader
 		UINT TextureArray3ds[MAXTEXTURE];	
 		t3DModel m3DModel;	
 
-		void Init_3ds(char* path, char* filename);
+		bool Init_3ds(char* path, char* filename);
 		void Render_3ds();
-		void Texture_3ds(UINT textureArray[], LPSTR path, LPSTR strFileName, int ID);
+		bool Texture_3ds(UINT textureArray[], LPSTR path, LPSTR strFileName, int ID);
 		void Unload_3ds();
 };
 
 
 #endif
 
-//Ronny André Reierstad
+//Ronny Andrï¿½ Reierstad
 //www.morrowland.com
 //apron@morrowland.com

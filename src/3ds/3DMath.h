@@ -1,7 +1,7 @@
 #ifndef _3DMATH_H
 #define _3DMATH_H
 
-#include "main.h"
+#include "Main.h"
 
 
 #define PI 3.1415926535897932
@@ -34,6 +34,6 @@ float Magnitude(tVector3 vNormal);
 
 #endif
 
-//Ronny André Reierstad
+//Ronny Andrï¿½ Reierstad
 //www.morrowland.com
 //apron@morrowland.com

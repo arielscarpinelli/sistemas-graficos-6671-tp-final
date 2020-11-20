@@ -2,10 +2,10 @@
 #include <math.h>
 #include "stdio.h"
 
-#define ROZAMIENTO 			2
-#define ACELERACION 		15
-#define FRENO 				10
-#define MAXIMA_VELOCIDAD 	36 
+#define ROZAMIENTO 			5
+#define ACELERACION 		50
+#define FRENO 				20
+#define MAXIMA_VELOCIDAD 	72 
 #define MAXIMA_REVERSA 		10
 
 #define ABS(x) ((x < 0 ? -x : x))
@@ -31,7 +31,9 @@ Car::Car()
 	y = 160;
 	
 	// Cargar el modelo
-	loader.Init_3ds("jeep/", "jeep/jeep1.3ds");
+	if(!loader.Init_3ds("jeep/", "jeep/jeep1.3ds")) {
+		printf("no puedo cargar jeep\n");
+	}
 //	dffLoader.ImportDFF(new TextureLoader(), "car/car.dff");
 
 	float light_color[4] = {1.0f, 1.0f, 0.0f, 1.0f};

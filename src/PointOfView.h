@@ -1,7 +1,7 @@
 #ifndef POINTOFVIEW_H_
 #define POINTOFVIEW_H_
 
-#include <GL/glut.h>
+#include "GL/glut.h"
 
 class PointOfView
 {

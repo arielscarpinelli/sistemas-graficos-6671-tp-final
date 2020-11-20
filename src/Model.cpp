@@ -62,7 +62,9 @@ void Model::draw()
 	if(cull())
 		return;
 	predraw(); 
-	glCallList(this->dl_handle);
+	if (this->dl_handle) {
+		glCallList(this->dl_handle);
+	}
 	postdraw();
 };
 
